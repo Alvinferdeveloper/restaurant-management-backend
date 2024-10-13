@@ -1,0 +1,115 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserGender {
+  F
+  M
+}
+
+enum RoleEntity {
+  ADMIN
+  USER
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  lastName String
+  cedula String @db.Char(16)
+  phone_number String? @db.Char(8)
+  email     String   @unique
+  password String
+  gender UserGender
+  roles Role[] @relation("userRoles")
+  oders Order[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  name      String
+  lastName String
+  cedula String @db.Char(16)
+  phone_number String? @db.Char(8)
+  email     String   @unique
+  password String
+  gender UserGender
+  inss String
+  deleted Boolean @default(false)
+  roles Role[] @relation("adminRoles")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt 
+  tables Table[]
+  foods Food[]
+}
+
+model Role {
+  id Int @id @default(autoincrement())
+  name String
+  entity RoleEntity
+  users User[] @relation("userRoles")
+  admins Admin[] @relation("adminRoles")
+}
+
+model Table {
+  id Int @id @default(autoincrement())
+  name String
+  admin_id Int
+  admin Admin @relation(fields: [admin_id], references: [id])
+  available Boolean @default(true)
+  deleted Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt 
+}
+
+model Food {
+  id Int @id @default(autoincrement())
+  name String
+  ingredients String
+  price Float
+  preparation_time Int
+  admin_id Int
+  admin Admin @relation(fields: [admin_id], references: [id])
+  available Boolean @default(true)
+  deleted Boolean @default(false)
+  orders Order[]
+  food_order Food_Order[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt 
+}
+
+model Order{
+  id Int @id @default(autoincrement())
+  user_id Int
+  user User @relation(fields: [user_id], references: [id])
+  total Float
+  date DateTime
+  food Food[]
+   food_order Food_Order[]
+  deleted Boolean @default(false)
+}
+model Food_Order {
+  order_Id    Int
+  food_Id    Int
+  amount Int // Campo adicional
+  total Float
+  order Order @relation(fields: [order_Id], references: [id])
+  food Food @relation(fields: [food_Id], references: [id])
+
+  @@id([order_Id, food_Id]) // Clave primaria compuesta
+  @@map("FoodOrders")      // Nombre personalizado de la tabla intermedia
+}
+
