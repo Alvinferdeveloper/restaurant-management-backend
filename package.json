@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "compile": "tsc && babel dist --out-dir dist",
-    "start": "npm run compile && node ./dist/index.js"
+    "start": "npm run compile && node --watch ./dist/index.js"
   },
   "keywords": [],
   "author": "",

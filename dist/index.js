@@ -1,9 +1,9 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import { userDefs } from "./typeDefs/user.js";
+import typeDefs from "./typeDefs/index.js";
 import { userResolvers } from "./resolvers/user.js";
 const server = new ApolloServer({
-  typeDefs: userDefs,
+  typeDefs: typeDefs,
   resolvers: userResolvers
 });
 await startStandaloneServer(server, {
