@@ -33,7 +33,7 @@ model User {
   password String
   gender UserGender
   roles Role[] @relation("userRoles")
-  oders Order[]
+  orders Order[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
