@@ -33,5 +33,7 @@ export const userDefs = `
     
     type Mutation {
         addUser(userInput: UserInput): User
+        login(email:String!, password:String): User
     }
+    
 `;
