@@ -7,5 +7,17 @@ export const tableDefs = `
         deleted:Boolean!
         createdAt: String!
         updatedAt: String!
-    }    
+    }
+    input TableInput {
+        name: String!
+    }
+
+    
+    type Query {
+        tables: [Table]
+    }
+    
+    type Mutation {
+        addTable(tableInput: TableInput): Table
+    }
 `;
