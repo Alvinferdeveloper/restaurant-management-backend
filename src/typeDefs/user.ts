@@ -16,9 +16,22 @@ export const userDefs = `
         createdAt: String!
         updatedAt: String! 
     }
+    
+    input UserInput {
+     name: String!
+        lastName: String!
+        cedula: String!
+        phone_number: String
+        email: String
+        password: String!
+        gender: UserGender!
+    }
 
     type Query {
         users: [User]
     }
     
+    type Mutation {
+        addUser(userInput: UserInput): User
+    }
 `;
