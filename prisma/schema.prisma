@@ -70,6 +70,8 @@ model Table {
   admin_id Int
   admin Admin @relation(fields: [admin_id], references: [id])
   available Boolean @default(true)
+  table_number Int
+  seats Int
   deleted Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt 

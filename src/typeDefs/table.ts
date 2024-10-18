@@ -4,12 +4,15 @@ export const tableDefs = `
         name: String!
         admin: Admin!
         available: Boolean!
+        table_number: Int!
+        seats: Int!
         deleted:Boolean!
         createdAt: String!
         updatedAt: String!
     }
     input TableInput {
         name: String!
+        seats: Int!
     }
 
     
