@@ -14,6 +14,12 @@ export const tableResolvers = {
       updateTable: async (rootCertificates, args) => {
         const { id, ...restProp} = args.tableUpdate;
         return prisma.table.update({ where: { id: Number(id) }, data:{ ...restProp}})
+      },
+
+      deleteTable: async (root, args) => {
+        const { id } = args; 
+        console.log(id)
+        return await prisma.table.delete({ where: { id: Number(id) }}) ? true : false;
       }
     }
   };

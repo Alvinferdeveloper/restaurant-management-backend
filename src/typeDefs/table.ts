@@ -28,5 +28,6 @@ export const tableDefs = `
     type Mutation {
         addTable(tableInput: TableInput): Table
         updateTable(tableUpdate: TableUpdate):Table
+        deleteTable(id: ID): Boolean
     }
 `;
