@@ -11,5 +11,9 @@ export const tableResolvers = {
         const nextTableNumber = lastTableInserted ? lastTableInserted.table_number + 1 : 1;
         return prisma.table.create({ data: { name: args.tableInput.name, table_number:nextTableNumber, seats: args.tableInput.seats , admin: { connect: { id: admin.id}}}})
       },
+      updateTable: async (rootCertificates, args) => {
+        const { id, ...restProp} = args.tableUpdate;
+        return prisma.table.update({ where: { id: Number(id) }, data:{ ...restProp}})
+      }
     }
   };

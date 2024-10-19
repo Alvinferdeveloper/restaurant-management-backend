@@ -14,7 +14,12 @@ export const tableDefs = `
         name: String!
         seats: Int!
     }
-
+    
+    input TableUpdate {
+     id: ID!
+     name: String
+     seats: Int
+    }
     
     type Query {
         tables: [Table]
@@ -22,5 +27,6 @@ export const tableDefs = `
     
     type Mutation {
         addTable(tableInput: TableInput): Table
+        updateTable(tableUpdate: TableUpdate):Table
     }
 `;
