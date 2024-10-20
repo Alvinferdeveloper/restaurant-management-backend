@@ -3,6 +3,7 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 import typeDefs from './typeDefs/index';
 import { userResolvers } from './resolvers/user';
 import { tableResolvers } from './resolvers/table';
+import { signedUrlResolvers } from './resolvers/signedUrl';
 
 const resolvers = {
     Query: {
@@ -12,6 +13,7 @@ const resolvers = {
     Mutation: {
       ...userResolvers.Mutation,
       ...tableResolvers.Mutation,
+      ...signedUrlResolvers.Mutation
     },
   };
 const server = new ApolloServer({

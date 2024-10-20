@@ -2,12 +2,13 @@
     "compilerOptions": {
       "rootDirs": ["src"],
       "outDir": "dist",
-      "lib": ["es2020"],
+      "lib": ["es2020", "DOM"],
       "target": "ES2022",
       "module": "esnext",
       "moduleResolution": "Bundler",
       "esModuleInterop": true,
-      "types": ["node"]
+      "types": ["node"],
+      
     },
     "include": ["src/**/*"],
     "exclude": ["node_modules", "dist"]
