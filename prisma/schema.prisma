@@ -83,6 +83,7 @@ model Food {
   ingredients String
   price Float
   preparation_time Int
+  image String @db.LongText
   admin_id Int
   admin Admin @relation(fields: [admin_id], references: [id])
   available Boolean @default(true)
