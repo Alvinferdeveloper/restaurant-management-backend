@@ -5,7 +5,7 @@ export const signedUrlResolvers = {
             const { data, error } = await supabase.storage
                 .from('food') 
                 .createSignedUploadUrl(`image/${args.filename}`);
-            return error ? null : data.signedUrl;
+            return error ? null : data;
         },
     }
 };
