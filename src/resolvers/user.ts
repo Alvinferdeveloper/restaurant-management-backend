@@ -10,7 +10,7 @@ export const userResolvers = {
         return prisma.user.create({ data: { roles: { connect: { id: userRole.id}}, ...args.userInput} , include:{ roles: true}});
       },
       login: async (root, args) => {
-        return prisma.user.findFirst({ where: { email: args.email, password: args.password}})
+        return prisma.admin.findFirst({ where: { email: args.email, password: args.password}})
       }
     }
   };

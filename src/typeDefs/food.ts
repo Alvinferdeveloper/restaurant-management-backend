@@ -6,6 +6,7 @@ export const    foodDefs = `
         price: Float!
         preparation_time: Int!
         admin: Admin!
+        image: String!
         available: Boolean!
         deleted:Boolean!
         orders: [Order]
@@ -13,4 +14,16 @@ export const    foodDefs = `
         createdAt: String!
         updatedAt: String!
     }    
+    
+    input FoodInput {
+        name: String!
+        ingredients: String!
+        price: Float!
+        preparation_time: Int!
+        image: String!
+    }
+
+     type Mutation {
+        addFood(foodInput: FoodInput): Food
+    }
 `;
