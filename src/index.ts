@@ -10,6 +10,7 @@ const resolvers = {
     Query: {
       ...userResolvers.Query,
       ...tableResolvers.Query,
+      ...foodResolvers.Query
     },
     Mutation: {
       ...userResolvers.Mutation,

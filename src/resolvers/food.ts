@@ -1,6 +1,11 @@
 import prisma from "../lib/prisma";
 import supabase from "../lib/supabase";
 export const foodResolvers = {
+    Query:{
+        foods:()=> {
+            return prisma.food.findMany({ where: { deleted: false }});  
+        }
+    },
     Mutation: {
         addFood: async (root, args) => {
             const { foodInput } = args;

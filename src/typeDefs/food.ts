@@ -2,7 +2,7 @@ export const    foodDefs = `
     type Food {
         id: ID!
         name: String!
-        ingredients: [String]
+        ingredients: String!
         price: Float!
         preparation_time: Int!
         admin: Admin!
@@ -21,6 +21,10 @@ export const    foodDefs = `
         price: Float!
         preparation_time: Int!
         image: String!
+    }
+    
+    type Query {
+        foods: [Food]
     }
 
      type Mutation {
