@@ -30,5 +30,6 @@ export const    foodDefs = `
      type Mutation {
         addFood(foodInput: FoodInput): Food
         deleteFood(id:ID): Boolean
+        toogleStatus(id:ID): Food
     }
 `;
