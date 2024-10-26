@@ -22,6 +22,16 @@ export const    foodDefs = `
         preparation_time: Int!
         image: String!
     }
+
+     input FoodUpdate {
+        id: ID!
+        name: String
+        ingredients: String
+        price: Float
+        preparation_time: Int
+        image: String
+        available: Boolean
+    }
     
     type Query {
         foods: [Food]
@@ -31,5 +41,6 @@ export const    foodDefs = `
         addFood(foodInput: FoodInput): Food
         deleteFood(id:ID): Boolean
         toogleStatus(id:ID): Food
+        updateFood(foodUpdate: FoodUpdate):Food
     }
 `;

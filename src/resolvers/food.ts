@@ -28,6 +28,10 @@ export const foodResolvers = {
                 }
             });
              
+    },
+    updateFood: (root, args) => {
+        const { id, ...restOfProps } = args.foodUpdate;
+        return prisma.food.update({ where: { id: Number(id) }, data: { ...restOfProps}})
     }
 }
 };
