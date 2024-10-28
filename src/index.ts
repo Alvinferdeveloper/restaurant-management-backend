@@ -1,5 +1,4 @@
-import { ApolloServer } from '@apollo/server'; 
-import { startStandaloneServer } from '@apollo/server/standalone'; 
+import { ApolloServer } from '@apollo/server';  
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import typeDefs from './typeDefs/index';
@@ -9,6 +8,8 @@ import { userResolvers } from './resolvers/user';
 import { tableResolvers } from './resolvers/table';
 import { signedUrlResolvers } from './resolvers/signedUrl';
 import { foodResolvers } from './resolvers/food';
+import cookieParser from 'cookie-parser'
+import cors from 'cors'
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -34,15 +35,18 @@ const server = new ApolloServer({
 
 
 await server.start();
+app.use(cookieParser());
+app.use(cors())
 
 app.use(
   '/',
   express.json(),
-  expressMiddleware(server),
+  expressMiddleware(server, { context: async ({req, res})=> ({req, res})}),
 );
 
 
+
 await new Promise<void>((resolve) =>
-  httpServer.listen({ port: 4000 }, resolve),
+  httpServer.listen({ port: 3000 }, resolve),
 );
 console.log(`🚀 Server ready at http://localhost:4000/`);
