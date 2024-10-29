@@ -6,9 +6,13 @@ interface PayLoad {
     cedula: string,
     email: string,
     gender: 'M' | 'F',
-    roles: [string],
+    roles: { id: number, name:string, entity:string}[],
 
 }
 export function generateToken(payload: PayLoad){
     return jwt.encode(payload, process.env.JWT_SECRET_KEY );
+}
+
+export function decodeToken (token: string) {
+    return jwt.decode(token, process.env.JWT_SECRET_KEY);
 }
