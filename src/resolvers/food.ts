@@ -4,9 +4,9 @@ import { decodeToken } from "../services/token.service";
 import { authAsync } from "../utils/auth";
 export const foodResolvers = {
     Query: {
-        foods: () => {
+        foods: authAsync(() => {
             return prisma.food.findMany({ where: { deleted: false } });
-        }
+        },[])
     },
     Mutation: {
         addFood: authAsync(async (root, args, token) => {
