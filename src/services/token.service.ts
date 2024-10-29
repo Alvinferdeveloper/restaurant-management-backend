@@ -1,12 +1,12 @@
 import jwt from 'jwt-simple'
 interface PayLoad {
-    id: string,
+    id: number,
     name: string,
     lastName: string,
     cedula: string,
     email: string,
     gender: 'M' | 'F',
-    roles: { id: number, name:string, entity:string}[],
+    roles: string[],
 
 }
 export function generateToken(payload: PayLoad){
