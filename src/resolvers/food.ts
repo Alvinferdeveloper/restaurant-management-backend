@@ -1,5 +1,7 @@
 import prisma from "../lib/prisma";
 import supabase from "../lib/supabase";
+import { decodeToken } from "../services/token.service";
+import { authAsync } from "../utils/auth";
 export const foodResolvers = {
     Query: {
         foods: () => {
@@ -7,17 +9,17 @@ export const foodResolvers = {
         }
     },
     Mutation: {
-        addFood: async (root, args, context) => {
+        addFood: authAsync(async (root, args, token) => {
             const { foodInput } = args;
-            const admin = await prisma.admin.findFirst({ where: { roles: { some: { name: "ADMIN" } } } });
+            const adminPayload = decodeToken(token);
             const publicImageUrl = await supabase.storage.from('food').getPublicUrl(foodInput.image);
-            return prisma.food.create({ data: { ...foodInput, image: publicImageUrl.data.publicUrl, admin: { connect: { id: admin.id } } } })
-        },
-        deleteFood: async (root, args) => {
+            return prisma.food.create({ data: { ...foodInput, image: publicImageUrl.data.publicUrl, admin: { connect: { id: adminPayload.id } } } })
+        },['ADMIN']),
+        deleteFood: authAsync(async (root, args) => {
             const { id } = args;
             return await prisma.food.update({ where: { id: Number(id) }, data: { deleted: true } }) ? true : false;
-        },
-        toogleStatus: async  (root, args) => {
+        }, ['ADMIN']),
+        toogleStatus:authAsync( async  (root, args) => {
             const { id } = args;
             return await prisma.food.update({
                 where: { id: Number(id) },
@@ -28,10 +30,10 @@ export const foodResolvers = {
                 }
             });
              
-    },
-    updateFood: (root, args) => {
+    }, ['ADMIN']),
+    updateFood: authAsync((root, args) => {
         const { id, ...restOfProps } = args.foodUpdate;
         return prisma.food.update({ where: { id: Number(id) }, data: { ...restOfProps}})
-    }
+    }, ['ADMIN'])
 }
 };

@@ -24,6 +24,6 @@ export const authAsync = (fn, requiredRoles: string[]) => (root, args, { req }) 
             code: 'FORBIDDEN',
         },
     });
-    return fn(root, args);
+    return fn(root, args, token);
 
 }
