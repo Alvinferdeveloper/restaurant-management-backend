@@ -27,8 +27,14 @@ export const userDefs = `
         gender: UserGender!
     }
 
+    type UserAuth {
+        id: Int,
+        name: String,
+        roles: [String]
+    }
     type Query {
         users: [User]
+        user: UserAuth
     }
     
     type Mutation {

@@ -1,11 +1,15 @@
 import prisma from "../lib/prisma";
-import { generateToken } from "../services/token.service";
+import { decodeToken, generateToken } from "../services/token.service";
 import { authAsync, getRoles, isAuthorized } from "../utils/auth";
 export const userResolvers = {
     Query: {
       users: authAsync(()=> {
         return prisma.user.findMany();
       }, ['ADMIN']),
+      user: authAsync((root, args, token)=> {
+        const user = decodeToken(token);
+        return { id: user.id, name: user.name, roles: user.roles };
+      },[])
     },
     Mutation: {
       userRegister:async (root, args, { res}) => {
