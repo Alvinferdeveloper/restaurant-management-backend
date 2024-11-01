@@ -99,7 +99,7 @@ model Order{
   user_id Int
   user User @relation(fields: [user_id], references: [id])
   total Float
-  date DateTime
+  date DateTime @default(now())
   food Food[]
    food_order Food_Order[]
   deleted Boolean @default(false)
