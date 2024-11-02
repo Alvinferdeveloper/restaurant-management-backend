@@ -30,6 +30,10 @@ export const userResolvers = {
           res.cookie('restaurant_token',token , { httpOnly: true, maxAge: 1000 * 60 * 60 }); 
           return userLogged;
         }
+      },
+      logOut: (root, args, { res })=>{
+        res.clearCookie('restaurant_token');
+        return true;
       }
     }
   };
