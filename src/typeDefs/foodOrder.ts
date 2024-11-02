@@ -7,4 +7,10 @@ export const foodOrderDefs = `
        order: Order
        food: Food
     }    
+
+    input FoodOrderInput {
+        food_id: Int!
+        amount: Int!
+        total: Float!
+    }
 `;

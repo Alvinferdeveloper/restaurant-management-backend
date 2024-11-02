@@ -10,6 +10,7 @@ import { signedUrlResolvers } from './resolvers/signedUrl';
 import { foodResolvers } from './resolvers/food';
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import { orderResolvers } from './resolvers/order';
 
 const app = express();
 app.use(cors({
@@ -29,6 +30,7 @@ const resolvers = {
       ...tableResolvers.Mutation,
       ...signedUrlResolvers.Mutation,
       ...foodResolvers.Mutation,
+      ...orderResolvers.Mutation
     },
   };
 const server = new ApolloServer({
