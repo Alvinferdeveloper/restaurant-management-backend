@@ -6,12 +6,12 @@ export const orderResolvers = {
     Query: {
     },
     Mutation: {
-        addOrder: authAsync(async(root, args)=>{
+        addOrder: authAsync(async(root, args, token)=>{
             const { orderInput } = args;
-            console.log(orderInput);
+            const user = decodeToken(token);
             return prisma.order.create({
                 data: {
-                    user_id:orderInput.user_id,
+                    user_id:user.id,
                     total: orderInput.total,
                     food_order:{
                         create: orderInput.foodOrders.map(foodOrder => (

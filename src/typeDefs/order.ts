@@ -12,7 +12,6 @@ export const orderDefs = `
 
 
     input OrderInput {
-        user_id: Int
         total: Float!
         foodOrders: [FoodOrderInput]!
     }
