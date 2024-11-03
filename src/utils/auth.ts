@@ -11,7 +11,7 @@ export const isAuthorized = (userRoles: string[], requiredRoles: string[]) => {
 }
 
 
-export const authAsync = (fn, requiredRoles: string[]) => (root, args, { req }) => {
+export const authAsync = (fn, requiredRoles: string[]) => (root, args, { req, res }) => {
     const token = req.cookies.restaurant_token;
     if (!token) throw new GraphQLError('You are not authenticated.', {
         extensions: {
@@ -24,6 +24,6 @@ export const authAsync = (fn, requiredRoles: string[]) => (root, args, { req }) 
             code: 'FORBIDDEN',
         },
     });
-    return fn(root, args, token);
+    return fn(root, args, token, { req, res});
 
 }
