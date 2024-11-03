@@ -23,7 +23,8 @@ const resolvers = {
     Query: {
       ...userResolvers.Query,
       ...tableResolvers.Query,
-      ...foodResolvers.Query
+      ...foodResolvers.Query,
+      ...orderResolvers.Query,
     },
     Mutation: {
       ...userResolvers.Mutation,

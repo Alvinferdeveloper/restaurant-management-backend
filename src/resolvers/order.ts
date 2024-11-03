@@ -4,6 +4,10 @@ import { decodeToken } from "../services/token.service";
 import { authAsync } from "../utils/auth";
 export const orderResolvers = {
     Query: {
+        orders: authAsync((root, args, token)=>{
+            const user = decodeToken(token);
+            return prisma.order.findMany({ where:{ user_id: user.id }, include:{ food:true}});
+        },["USER"]),
     },
     Mutation: {
         addOrder: authAsync(async(root, args, token)=>{
@@ -24,6 +28,6 @@ export const orderResolvers = {
                     }
                 }
             })
-        },["USER"])
+        },["USER"]),
     }
 };

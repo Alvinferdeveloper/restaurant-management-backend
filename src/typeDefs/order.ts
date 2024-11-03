@@ -16,6 +16,10 @@ export const orderDefs = `
         foodOrders: [FoodOrderInput]!
     }
     
+    type Query {
+        orders:[Order]
+    }
+    
     type Mutation {
         addOrder(orderInput: OrderInput): Order
     }
