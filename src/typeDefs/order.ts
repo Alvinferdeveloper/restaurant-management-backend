@@ -18,6 +18,7 @@ export const orderDefs = `
     
     type Query {
         orders:[Order]
+        order(orderId:ID!): Order
     }
     
     type Mutation {

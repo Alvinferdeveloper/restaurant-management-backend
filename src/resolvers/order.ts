@@ -8,6 +8,11 @@ export const orderResolvers = {
             const user = decodeToken(token);
             return prisma.order.findMany({ where:{ user_id: user.id }, include:{ food:true}});
         },["USER"]),
+        order: authAsync((root, args, token)=>{
+            const user = decodeToken(token);
+            const { orderId } = args;
+            return prisma.order.findFirst({ where: { id: Number(orderId), user_id: user.id }, include: { food_order:{ include:{food:true}}}});
+        },["USER","ADMIN"]),
     },
     Mutation: {
         addOrder: authAsync(async(root, args, token)=>{
