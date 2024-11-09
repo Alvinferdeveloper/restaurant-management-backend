@@ -109,6 +109,7 @@ model Food_Order {
   food_Id    Int
   amount Int // Campo adicional
   total Float
+  date DateTime @default(now())
   order Order @relation(fields: [order_Id], references: [id])
   food Food @relation(fields: [food_Id], references: [id])
 

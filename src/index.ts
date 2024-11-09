@@ -11,6 +11,7 @@ import { foodResolvers } from './resolvers/food';
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import { orderResolvers } from './resolvers/order';
+import { orderStatisticsResolvers } from './resolvers/orderStatistic';
 
 const app = express();
 app.use(cors({
@@ -25,6 +26,7 @@ const resolvers = {
       ...tableResolvers.Query,
       ...foodResolvers.Query,
       ...orderResolvers.Query,
+      ...orderStatisticsResolvers.Query
     },
     Mutation: {
       ...userResolvers.Mutation,
