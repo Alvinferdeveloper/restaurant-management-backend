@@ -1,4 +1,4 @@
-import { getTotalSales, getServedClients, getFoodSold, getWeeklySales, getBestSellingFood } from "../services/orderStatistics.service";
+import { getTotalSales, getServedClients, getFoodSold, getWeeklySales, getBestSellingFood, getWeekFoodSold } from "../services/orderStatistics.service";
 import { authAsync } from "../utils/auth";
 export const orderStatisticsResolvers = {
   Query: {
@@ -8,7 +8,8 @@ export const orderStatisticsResolvers = {
       const foodSold = await getFoodSold();
       const weeklySales = await getWeeklySales();
       const bestSellingFood = await getBestSellingFood();
-      return { totalSales, servedClients, foodSold, weeklySales, bestSellingFood };
+      const weekFoodSold = await getWeekFoodSold();
+      return { totalSales, servedClients, foodSold, weeklySales, bestSellingFood, weekFoodSold };
     },[]),
   },
 };

@@ -14,6 +14,7 @@ export const orderStatisticsDefs = `
         totalSales: Float
         servedClients: Int
         foodSold: Int
+        weekFoodSold: Int
         weeklySales: [DaySale]
         bestSellingFood:[SoldFood]
     }

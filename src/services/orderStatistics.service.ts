@@ -99,3 +99,18 @@ export async function getBestSellingFood() {
 
     return result;
 }
+
+export async function getWeekFoodSold(){
+    const start = startOfWeek(today, { weekStartsOn: 1 });
+    const end = endOfWeek(today, { weekStartsOn: 1 });
+    const foodOrderDoc = await prisma.food_Order.count({ 
+        where: { 
+            date: {
+                gte: start,
+                lte: end
+            }
+        }
+    })    
+
+    return foodOrderDoc;
+}
