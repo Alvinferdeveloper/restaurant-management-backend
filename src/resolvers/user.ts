@@ -1,3 +1,4 @@
+import { GraphQLError } from "graphql";
 import prisma from "../lib/prisma";
 import { decodeToken, generateToken } from "../services/token.service";
 import { authAsync, getRoles, isAuthorized } from "../utils/auth";
@@ -14,6 +15,8 @@ export const userResolvers = {
     Mutation: {
       userRegister:async (root, args, { res}) => {
         const userRole = await prisma.role.findFirst({ where: { name: "USER"}});
+        const email = await prisma.user.findFirst({ where: { email: args.userInput.email}});
+        if( email ) throw new GraphQLError('EMAIL_EXISTS');
         const user = await prisma.user.create({ data: { roles: { connect: { id: userRole.id}}, ...args.userInput} , include:{ roles: true}});
         const roles = user.roles.map(role => role.name);
         const token = generateToken({...user,roles})
