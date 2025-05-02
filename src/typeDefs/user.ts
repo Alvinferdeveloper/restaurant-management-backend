@@ -22,7 +22,7 @@ export const userDefs = `
         lastName: String!
         cedula: String!
         phone_number: String
-        email: String
+        email: String!
         password: String!
         gender: UserGender!
     }

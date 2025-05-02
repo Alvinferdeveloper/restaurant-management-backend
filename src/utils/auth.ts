@@ -1,7 +1,8 @@
 import { decodeToken } from "../services/token.service";
 import { GraphQLError } from "graphql";
+import { Request, Response } from "express";
 
-export const getRoles = (token) => {
+export const getRoles = (token: string) => {
     const payload = decodeToken(token);
     return payload.roles;
 }
@@ -11,7 +12,7 @@ export const isAuthorized = (userRoles: string[], requiredRoles: string[]) => {
 }
 
 
-export const authAsync = (fn, requiredRoles: string[]) => (root, args, { req, res }) => {
+export const authAsync = (fn, requiredRoles: string[]) => (root, args, { req, res }: { req: Request, res: Response }) => {
     const token = req.cookies.restaurant_token;
     if (!token) throw new GraphQLError('You are not authenticated.', {
         extensions: {
@@ -24,6 +25,6 @@ export const authAsync = (fn, requiredRoles: string[]) => (root, args, { req, re
             code: 'FORBIDDEN',
         },
     });
-    return fn(root, args, token, { req, res});
+    return fn(root, args, token, { req, res });
 
 }
