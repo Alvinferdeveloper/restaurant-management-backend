@@ -1,5 +1,5 @@
 type Gender = "F" | "M"
-    
+
 export type UserInput = {
     name: string,
     lastName: string,
