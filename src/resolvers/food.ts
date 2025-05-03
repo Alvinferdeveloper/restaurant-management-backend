@@ -19,23 +19,16 @@ export const foodResolvers = {
         }, ['ADMIN']),
         deleteFood: authAsync(async (root, args: { id: string }) => {
             const { id } = args;
-            return await prisma.food.update({ where: { id: Number(id) }, data: { deleted: true } }) ? true : false;
+            return await foodService.deleteFood(id);
         }, ['ADMIN']),
         toogleStatus: authAsync(async (root, args: { id: string }) => {
             const { id } = args;
-            return await prisma.food.update({
-                where: { id: Number(id) },
-                data: {
-                    available: {
-                        set: await prisma.food.findUnique({ where: { id: Number(id) } }).then(food => !food.available)
-                    }
-                }
-            });
+            return foodService.toogleStatus(id);
 
         }, ['ADMIN']),
         updateFood: authAsync((root, args: { foodUpdate: FoodUpdate }) => {
             const { id, ...restOfProps } = args.foodUpdate;
-            return prisma.food.update({ where: { id: Number(id) }, data: { ...restOfProps } })
+            return foodService.updateFood(id, restOfProps);
         }, ['ADMIN'])
     }
 };
