@@ -6,6 +6,7 @@ import express from 'express';
 import http from 'http'
 import { userResolvers } from './resolvers/user';
 import { tableResolvers } from './resolvers/table';
+import { authResolvers } from './resolvers/auth';
 import { signedUrlResolvers } from './resolvers/signedUrl';
 import { foodResolvers } from './resolvers/food';
 import cookieParser from 'cookie-parser'
@@ -29,11 +30,11 @@ const resolvers = {
       ...orderStatisticsResolvers.Query
     },
     Mutation: {
-      ...userResolvers.Mutation,
       ...tableResolvers.Mutation,
       ...signedUrlResolvers.Mutation,
       ...foodResolvers.Mutation,
-      ...orderResolvers.Mutation
+      ...orderResolvers.Mutation,
+      ...authResolvers.Mutation
     },
   };
 const server = new ApolloServer({
