@@ -1,4 +1,4 @@
-import { UserInput } from "../types/graphql";
+import { UserInput } from "../types/inputTypes";
 import { Response } from "express";
 import * as authService from "../services/auth.service";
 

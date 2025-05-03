@@ -12,7 +12,7 @@ export const isAuthorized = (userRoles: string[], requiredRoles: string[]) => {
 }
 
 
-export const authAsync = (fn:(root:unknown, args, token: string, { req, res }: { req: Request, res: Response }) => any, requiredRoles: string[]) => (root: any, args: any, { req, res }: { req: Request, res: Response }) => {
+export const authAsync = (fn:(root:unknown, args:unknown, token: string, { req, res }: { req: Request, res: Response }) => any, requiredRoles: string[]) => (root: any, args: any, { req, res }: { req: Request, res: Response }) => {
     const token = req.cookies.restaurant_token;
     if (!token) throw new GraphQLError('You are not authenticated.', {
         extensions: {

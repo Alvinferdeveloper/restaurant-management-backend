@@ -6,7 +6,7 @@ import { GraphQLError } from "graphql";
 import * as passwordService from "./password.service";
 import * as roleService from "./role.service";
 import prisma from "../lib/prisma";
-import { UserInput } from "../types/graphql";
+import { UserInput } from "../types/inputTypes";
 
 export async function login({ email, password }: { email: string, password: string }) {
     let userExists = await userService.getUserByEmail(email, { includeRoles: true });
